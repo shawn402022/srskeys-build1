@@ -1,7 +1,19 @@
 import { useState } from 'react'
 
 
-export default function checkMidi() {
+
+export default function CheckMidi() {
+window.AudioContext = window.AudioContext || window.webkitAudioContext
+let ctx
+
+    function audioMidi() {
+
+        const ctx = new AudioContext()
+        console.log(ctx)
+
+    }
+
+    audioMidi()
 
 // check to see if browser accepts MIDI    
 
@@ -41,8 +53,23 @@ export default function checkMidi() {
         } 
     }
 
+
+
+
+
     function noteOn(note, velocity) {
-        console.log(note, velocity)
+        const osc = ctx.createOscillator()
+        console.log(osc)
+
+        return (
+            <div className="button">
+            
+              <button onClick={()=>osc.start()}>Start</button>
+            
+            </div>
+        )
+
+   //console.log(note, velocity)
     }
 
     function noteOff(note) {
@@ -63,6 +90,9 @@ export default function checkMidi() {
     function failure() {
         console.log('Could not connect MIDI')
     }
+
+
+
 }
 
-checkMidi()
+CheckMidi()
